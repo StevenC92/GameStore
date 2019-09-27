@@ -1,6 +1,6 @@
 if (process.env.NODE_ENV !== 'production')
 {
-    require('dotenv').load()
+    require('dotenv').config()
 }
 
 const express = require('express');
@@ -9,6 +9,8 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts');
 
 const indexRouter = require('./routes/index');
+
+const authorRouter = require('./routes/authors');
 
 const mongoose = require('mongoose');
 
@@ -24,6 +26,7 @@ app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(express.static('public'));
 app.use('/', indexRouter);
+app.use('/authors', authorRouter);
 
 app.listen(process.env.PORT || 3000)
 
